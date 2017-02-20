@@ -14,7 +14,7 @@ outro = "\\end{{{}}}".format(mattype)
 # If the format selected is augmented matrix, override the above intro and outro
 if mattype == "augmented":    
     intro = "\\left[\\begin{{array}}{{{}|c}}\n".format("c" * (cols - 1))
-    outro = "\\end{{array}}\\right]"
+    outro = "\\end{array}\\right]"
 
 body = ""
 
@@ -25,10 +25,10 @@ for r in range(rows - 1):
         body = body + (input("({}, {}): ".format(r+1,c+1)) or "0") + " & "
     body = body + (input("({}, {}): ".format(r+1, cols)) or "0")
     body = body + "\\\\\n"
-body = body + "    "
+body = body + "    " # indent the body part
 for c in range(cols - 1):
-    body = body + (input("({}, {}): ".format(r+1,c+1)) or "0") + " & "
-body = body + (input("({}, {}): ".format(r+1, cols)) or "0")
+    body = body + (input("({}, {}): ".format(rows,c+1)) or "0") + " & "
+body = body + (input("({}, {}): ".format(rows, cols)) or "0")
 body = body + "\n"
 
 output = "{}{}{}".format(intro,body,outro)
@@ -41,8 +41,10 @@ for ch in ['\\']:
     if ch in escaped_output:
         escaped_output = escaped_output.replace(ch, "\\"+ch)
 
+# check the status of copying and give feedback
 return_value = os.system("echo '{}' | pbcopy".format(escaped_output))
 if return_value == 0:
     print("\nSuccessfully copied to clipboard!")
 else:
     print("\nCopy to clipboard failed")
+
