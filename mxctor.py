@@ -4,19 +4,21 @@
 import os
 
 # prompting for the number of rows and columns
-rows = int(input("Rows: "))
-cols = int(input("Columns: "))
 mattype = (input("Type of matrix (default: bmatrix): ") or "bmatrix")
+rows = int(input("Rows: ") or "3")
+cols = int(input("Columns: ") or "3")
 
-# constructing the opening and ending text
-intro = "\\begin{{{}}}\n".format(mattype)
-outro = "\\end{{{}}}".format(mattype)
-
-# If the format selected is augmented matrix, override the above intro and outro
-if mattype == "augmented":    
-    intro = "\\left[\\begin{{array}}{{{}|c}}\n".format("c" * (cols - 1))
+if mattype == "augmented":
+    # if we are creating an augmented matrix (then use array)
+    dividing_position = int(input("Dividing position (starts from 0): ") or "{:d}".format(cols-1))
+    intro = "\\left[\\begin{{array}}{{{}|{}}}\n".format("c" * (dividing_position), "c" * (cols - dividing_position))
     outro = "\\end{array}\\right]"
+else:
+    # constructing the opening and ending text for default matrices
+    intro = "\\begin{{{}}}\n".format(mattype)
+    outro = "\\end{{{}}}".format(mattype)
 
+# create an empty string for storing the main text body
 body = ""
 
 # main looping part, as the last entry doesn't need the ampersand, and the last line does not need \\, they are taken separately
