@@ -13,6 +13,12 @@ if mattype == "augmented":
     dividing_position = int(input("Dividing position (starts from 0): ") or "{:d}".format(cols-1))
     intro = "\\left[\\begin{{array}}{{{}|{}}}\n".format("c" * (dividing_position), "c" * (cols - dividing_position))
     outro = "\\end{array}\\right]"
+elif mattype == "small":
+    # if we are creating a small matrix
+    left_bracket = input("Enter left bracket (\"[\"): ") or "["
+    right_bracket = input("Enter right bracket (\"]\"): ") or "]"
+    intro = "{}\\begin{{smallmatrix}}\n".format(left_bracket)
+    outro = "\\end{{smallmatrix}}{}".format(right_bracket)
 else:
     # constructing the opening and ending text for default matrices
     intro = "\\begin{{{}}}\n".format(mattype)
