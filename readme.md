@@ -19,6 +19,6 @@ Supports automatic copy to clipboard on macOS.
 
 ## To-Do-List
 
-- Undo feature
+- Switch to delimiter separated input
 - Copy to clipboard for other OS
 
